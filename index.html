@@ -168,6 +168,10 @@
       radial-gradient(circle at 50% 62%, rgba(243,183,46,0.16), transparent 55%),
       linear-gradient(180deg, rgba(30,110,120,0.10), rgba(30,110,120,0.05));
   }
+  .hero-frame img.hero-photo-img{
+    position:relative; z-index:2;
+    width:100%; height:100%; object-fit:cover; border-radius:50%;
+  }
   .hero-frame figure{
     position:relative; z-index:2; text-align:center; padding:30px;
     color:var(--ink-soft);
@@ -183,7 +187,6 @@
     display:block; font-family:'Work Sans',sans-serif; font-weight:400; font-size:0.82rem;
     color:var(--ink-soft); margin-top:6px;
   }
-  /* id for easy photo swap: replace the whole <figure id="hero-photo"> block with an <img> tag */
 
   /* --- Section shell --- */
   section{ padding:clamp(44px, 8vw, 64px) 0; border-top:1px solid var(--rule); }
@@ -431,10 +434,20 @@
 
     <div class="hero-frame">
       <div class="placeholder-fill"></div>
-      <!-- HERO PHOTO PLACEHOLDER: replace this <figure> with
-           <img src="crochetsunflower.jpg" alt="Finished crochet sunflower and pond craft" style="width:100%;height:100%;object-fit:cover;">
-           to add your real photograph. -->
-      <figure id="hero-photo">
+
+      <!-- Real photo: shown if it loads successfully -->
+      <img
+        class="hero-photo-img"
+        id="hero-photo-img"
+        src="crochetsunflower.jpg"
+        alt="Finished crochet sunflower and pond craft"
+        style="display:none;"
+        onload="this.style.display='block'; document.getElementById('hero-photo').style.display='none';"
+        onerror="this.style.display='none'; document.getElementById('hero-photo').style.display='flex';"
+      >
+
+      <!-- Placeholder: shown until the real photo above loads -->
+      <figure id="hero-photo" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
         <svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M8 7l1.6-2.4A2 2 0 0111.2 3.6h1.6a2 2 0 011.6 1L16 7"/><circle cx="12" cy="14" r="4"/></svg>
         <figcaption>Your craft photo goes here
           <small>Sunflower &amp; pond crochet model</small>
